@@ -1,0 +1,10 @@
+.animated-text span {
+    display: inline-block;
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
