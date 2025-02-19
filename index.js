@@ -4,23 +4,35 @@ let challengeLetters = [];
 let correctWords = [];
 let playerGuess = "";
 let gameOn = false;
+let wordsRemaining;
 
+// Screen elements for manipulation
+const instructions = document.getElementById("instructions");
+const letters = document.getElementById("letters");
+const guess = document.getElementById("guess");
+const result = document.getElementById("result");
+const refresh = document.getElementById("new-letters");
+const found = document.getElementById("found-words");
+const remaining = document.getElementById("remaining");
 
 // Generate a random set of three letters. Repeat if the set does not generate more than 1 correct answer
 function getLetters() {
+  challengeLetters = [];
   for (i = 0; i < 3; i++) {
     challengeLetters.push(alphabet[Math.floor(Math.random() * 26)]);
   }
   correctWords = findAnswers();
-  if (correctWords.length <= 1) {
+  if (correctWords.length <= 5) {
     getLetters();
   }
-  const letters = document.getElementById("letters");
   let displayLetters = "";
   challengeLetters.forEach((letter) => {
     displayLetters = displayLetters + letter;
   })
   letters.innerHTML = displayLetters.toUpperCase();
+  wordsRemaining = correctWords.length;
+  remaining.innerHTML = `Words Remaining: ${wordsRemaining}`;
+
   return;
 }
 
@@ -35,40 +47,6 @@ function findAnswers() {
   return answers;
 }
 
-// Event listener for player keystrokes
-document.addEventListener("keydown", function(event) {
-  if (!gameOn) {
-    gameOn = true;
-    const instructions = document.getElementById("instructions");
-    instructions.setAttribute("hidden", true);
-    getLetters();
-    console.log(challengeLetters);
-    console.log(correctWords);
-    return;
-  }
-
-  if (event.key === "Backspace") {
-    playerGuess = playerGuess.slice(0, -1);
-  } else if (event.key.length === 1 && event.key.match(/[a-z]/i)) {
-    playerGuess = playerGuess + event.key;
-  } else if (event.key === "Enter") {
-    if (isValid(playerGuess)) {
-      const result = document.getElementById("result");
-      if (correctWords.includes(playerGuess.toLowerCase())) {
-        result.innerHTML = "That's a correct guess!"
-      } else {
-        result.innerHTML = "Sorry, that's not in the answer set."
-      }
-    } else {
-      alert("Not a valid guess, try again!");
-    }
-  }
-  const guess = document.getElementById("guess");
-  guess.innerHTML = playerGuess.toUpperCase();
-
-  console.log(playerGuess);
-})
-
 // Check if word is valid
 function isValid(word) {
   let checkLetters = challengeLetters.slice();
@@ -81,6 +59,60 @@ function isValid(word) {
   }
   return (checkLetters.length === 0);
 }
+
+function updateResult(phrase) {
+  result.innerHTML = phrase;
+  setTimeout(() => {
+    result.innerHTML = "";
+  }, 1000);
+}
+
+// Event listener for player keystrokes
+document.addEventListener("keydown", function(event) {
+  if (!gameOn) {
+    gameOn = true;
+    instructions.setAttribute("hidden", true);
+    refresh.removeAttribute("hidden");
+    found.removeAttribute("hidden");
+    getLetters();
+    console.log(challengeLetters);
+    console.log(correctWords);
+    return;
+  }
+
+  if (event.key === "Backspace") {
+    playerGuess = playerGuess.slice(0, -1);
+  } else if (event.key.length === 1 && event.key.match(/[a-z]/i)) {
+    playerGuess = playerGuess + event.key;
+  } else if (event.key === "Enter") {
+    if (isValid(playerGuess)) {
+      if (correctWords.includes(playerGuess.toLowerCase())) {
+        updateResult("That's a correct guess!");
+        found.innerHTML += `<li>${playerGuess.toLowerCase()}</li>`
+        wordsRemaining--;
+        remaining.innerHTML = `Words Remaining: ${wordsRemaining}`;
+      } else {
+        updateResult("Sorry, that's not in the answer set.");
+      }
+    } else {
+      updateResult("Not a valid guess, try again!");
+    }
+    playerGuess = "";
+  }
+  
+  guess.innerHTML = playerGuess.toUpperCase();
+  // console.log(playerGuess);
+})
+
+// Event Listener for New Letters button
+refresh.addEventListener("click", function() {
+  getLetters();
+  console.log(challengeLetters);
+  console.log(correctWords);
+  playerGuess = "";
+  guess.innerHTML = playerGuess.toUpperCase();
+  found.innerHTML = "Found Words:";
+})
 
 // Animation for game title
 function animateLetters(text, targetElement) {
