@@ -14,14 +14,26 @@
   padding: 0;
 }
 
+#start {
+  color: black;
+  height: 50px;
+  width: 100px;
+  font-weight: bolder;
+}
+
 .key {
   background-color: lightgray;
-  height: 30px;
+  color: black;
+  height: 40px;
   width: 30px;
   border-radius: 5px;
-  font-weight: bold;
+  font-weight: bolder;
   border: none;
   margin: 3px 1px;
+}
+
+.← {
+  width: 60px;
 }
 
 .submit {

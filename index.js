@@ -178,7 +178,3 @@ function animateLetters(text, targetElement) {
 // Generate game title
 const target = document.getElementById("title-letters");
 animateLetters("ORDERLY", target);
-
-
-
-
