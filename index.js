@@ -21,6 +21,8 @@ let foundWords = [];
 let gameOn = false;
 let wordsRemaining;
 let timeRemaining = 180;
+let minutes;
+let seconds;
 let score = 0;
 
 // Screen elements for manipulation
@@ -40,14 +42,15 @@ function startNewGame() {
   const countdown = setInterval(() => {
     if (timeRemaining === 0) {
       result.innerHTML = `Time's up!\nYou found ${foundWords.length} words, worth ${score} points`
+      gameOn = false;
       clearInterval(countdown);
     } else {
       timeRemaining--;
-      let minutes = Math.floor(timerRemaining / 60);
+      minutes = Math.floor(timeRemaining / 60);
       if (timeRemaining % 60 < 10) {
-        let seconds = "0" + timeRemaining % 60;
+        seconds = "0" + timeRemaining % 60;
       } else {
-        let seconds = timeRemaining % 60;
+        seconds = timeRemaining % 60;
       }
       timer.innerHTML = `${minutes}:${seconds}`;
     }
@@ -114,6 +117,7 @@ start.addEventListener("click", function(event) {
   refresh.removeAttribute("hidden");
   found.removeAttribute("hidden");
   keyboard.removeAttribute("hidden");
+  timer.removeAttribute("hidden");
   getLetters();
   startNewGame();
   console.log(challengeLetters);
@@ -140,6 +144,7 @@ document.addEventListener("keydown", function(event) {
         wordsRemaining--;
         remaining.innerHTML = `Words Remaining: ${wordsRemaining}`;
         foundWords.push(playerGuess);
+        score += playerGuess.length;
       } else {
         updateResult("Sorry, that's not in the answer set");
       }
@@ -155,6 +160,10 @@ document.addEventListener("keydown", function(event) {
 // Event Listener for player clicking keys
 for (button of document.querySelectorAll(".key")) {
   button.addEventListener("click", function() {
+    if (!gameOn) {
+      return;
+    }
+
     if (this.innerHTML === "←") {
       playerGuess = playerGuess.slice(0, -1);
     } else if (this.innerHTML.length === 1 && this.innerHTML.match(/[a-z]/i)) {
@@ -191,6 +200,9 @@ refresh.addEventListener("click", function() {
   guess.innerHTML = playerGuess.toUpperCase();
   found.innerHTML = "Found Words:";
   foundWords = [];
+  gameOn = true;
+  timeRemaining = 180;
+  startNewGame();
   this.blur();
 })
 
