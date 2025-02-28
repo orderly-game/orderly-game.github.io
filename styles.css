@@ -64,9 +64,13 @@ body {
   margin-bottom: 75px;
 }
 
-#instructions {
+#introduction {
   width: 400px;
   text-align: center;
+}
+
+#instructions {
+  padding: 10px;
 }
 
 .game-body {
