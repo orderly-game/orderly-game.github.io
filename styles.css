@@ -18,12 +18,10 @@
   }
 }
 
-div.score {
+div.points {
   position: fixed;
-  /* top: 100px;
-  left: 100px; */
   z-index: 1;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bolder;
   animation: scoreIn 0.5s ease-in-out forwards;
 }
@@ -34,27 +32,28 @@ div.score {
     transform: translateY(50%);
   }
   50% {
-    opacity: 0.4;
-    transform: translateY(-25%);
+    opacity: 0.5;
+    transform: translateY(-25%) scale(1.5);
   }
   100% {
-    opacity: 0.75;
+    opacity: 1;
     transform: translateY(0%);
   }
 }
 
 body {
   background-color: #E1BA93;
+  font-family: "Funnel Sans", sans-serif;
 }
 
-.container {
+.full-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .title {
-  font-family: "Dangrek", serif;
+  font-family: "Dangrek", sans-serif;
   font-weight: 400;
   font-size: 30px;
   font-style: normal;
@@ -62,7 +61,58 @@ body {
   text-shadow: -2px 2px 2px #92B5E0;
   height: 50px;
   margin-top: -50px;
-  margin-bottom: 50px;
+  margin-bottom: 75px;
+}
+
+#instructions {
+  width: 400px;
+  text-align: center;
+}
+
+.game-body {
+  width: 400px;
+}
+
+.tracking {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#timer {
+  font-size: 50px;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 15px 60px;
+  text-align: center;
+}
+
+#score {
+  font-size: 30px;
+  font-weight: 400;
+  color: white;
+  margin: 0 0 0 20px;
+  height: 40px;
+}
+
+.letters-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.letters {
+  background-color: white;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  font-size: 30px;
+  font-weight: 600;
+  height: 50px;
+  width: 40px;
+  margin-right: 10px;
+  border-radius: 5px;
 }
 
 #found-words {
@@ -75,7 +125,42 @@ button {
   color: black;
   height: 50px;
   width: auto;
+  border-radius: 5px;
   font-weight: bolder;
+  font-family: "Funnel Sans", sans-serif;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+#start {
+  width: 150px;
+  margin-top: 30px;
+}
+
+#guess {
+  height: 50px;
+  font-size: 40px;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+}
+
+#result {
+  height: 20px;
+  font-size: 15px;
+  margin: 10px;
+  text-align: center;
+}
+
+.keyboard {
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
 }
 
 .key {
@@ -83,20 +168,52 @@ button {
   color: black;
   height: 40px;
   width: 30px;
-  border-radius: 5px;
   border: none;
   margin: 3px 1px;
   padding: 0px;
   touch-action: manipulation;
 }
 
-.← {
-  width: 60px;
-}
-
 .submit {
   border: 1px solid black;
   background-color: green;
   color: white;
-  width: 100px;
+  width: 150px;
+}
+
+.word-list {
+  margin: 20px 0 0 50px;
+}
+
+#remaining {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+footer {
+  margin-top: 50px;
+  font-family: "Funnel Sans", sans-serif;
+}
+
+@media (min-width: 481px) {
+  .game-container {
+    display: flex;
+  }
+
+  .word-list {
+    padding: 10px;
+    border: 1px solid black;
+    width: 310px;
+    height: 450px;
+  }
+
+  .found {
+    height: 400px;
+    overflow-y: auto;
+  }
+}
+
+.hidden {
+  display: none;
 }

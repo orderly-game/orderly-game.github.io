@@ -6,62 +6,81 @@
     <link rel="stylesheet" href="./styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Dangrek&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dangrek&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <title>Orderly</title>
 </head>
 <body>
-    <div class="container">
-        <div class="title">
-            <h1 id="title-letters"></h1>
-        </div>
-
+    <div class="full-container">
         <div id="instructions">
+            <div class="title">
+                <h1 id="title-letters"></h1>
+            </div>
+
             <p>
-                Welcome to Orderly! <br />
-                You'll be shown three random letters.  Try to think of a word that contains all three letters in order (the letters do not have to be consecutive). <br />
-                Once you've typed it out, hit Enter or click Submit to check your word.<br />
+                Welcome to Orderly! <br /><br />
+                You'll be shown three random letters and have two minutes to find words that contain all three letters in order (the letters do not have to be consecutive). <br /><br />
+                Once you've typed it out, hit Enter or click Submit to check your word.  The longer the word, the more points you score!
             </p>
             <button id="start">Let's Go?</button>
         </div>
-        
-        <div class="game">
-            <p id="timer" hidden>3:00</p>
-            <button id="new-letters" hidden>Get New Letters</button>
-            <p id="letters"></p><br />
-            <p id="guess"></p><br />
-            <p id="result"></p>
-            <div class="keyboard" hidden>
-                <button class="q key">Q</button>
-                <button class="w key">W</button>
-                <button class="e key">E</button>
-                <button class="r key">R</button>
-                <button class="t key">T</button>
-                <button class="y key">Y</button>
-                <button class="u key">U</button>
-                <button class="i key">I</button>
-                <button class="o key">O</button>
-                <button class="p key">P</button><br />
-                <button class="a key">A</button>
-                <button class="s key">S</button>
-                <button class="d key">D</button>
-                <button class="f key">F</button>
-                <button class="g key">G</button>
-                <button class="h key">H</button>
-                <button class="j key">J</button>
-                <button class="k key">K</button>
-                <button class="l key">L</button><br />
-                <button class="z key">Z</button>
-                <button class="x key">X</button>
-                <button class="c key">C</button>
-                <button class="v key">V</button>
-                <button class="b key">B</button>
-                <button class="n key">N</button>
-                <button class="m key">M</button>
-                <button class="← key">←</button><br />
-                <button class="submit key">Submit</button>
+        <div class="game-container hidden">
+            <div class="game-body">
+                <div class="tracking">
+                    <p id="timer">2:00</p>
+                    <p id="score">Score: 0</p>
+                </div>
+                <div class="letters-container">
+                    <div class="letters"></div>
+                    <div class="letters"></div>
+                    <div class="letters"></div>
+                    <button id="new-letters">Get New Letters</button>
+                </div>
+                <p id="letters"></p><br />
+                <p id="guess"></p><br />
+                <p id="result"></p>
+                <div class="keyboard">
+                    <div class="key-line">
+                        <button class="q key">Q</button>
+                        <button class="w key">W</button>
+                        <button class="e key">E</button>
+                        <button class="r key">R</button>
+                        <button class="t key">T</button>
+                        <button class="y key">Y</button>
+                        <button class="u key">U</button>
+                        <button class="i key">I</button>
+                        <button class="o key">O</button>
+                        <button class="p key">P</button>
+                    </div>
+                    <div class="key-line">
+                        <button class="a key">A</button>
+                        <button class="s key">S</button>
+                        <button class="d key">D</button>
+                        <button class="f key">F</button>
+                        <button class="g key">G</button>
+                        <button class="h key">H</button>
+                        <button class="j key">J</button>
+                        <button class="k key">K</button>
+                        <button class="l key">L</button>
+                    </div>
+                    <div class="key-line">
+                        <button class="z key">Z</button>
+                        <button class="x key">X</button>
+                        <button class="c key">C</button>
+                        <button class="v key">V</button>
+                        <button class="b key">B</button>
+                        <button class="n key">N</button>
+                        <button class="m key">M</button>
+                        <button class="← key">←</button>
+                    </div>
+                    <button class="submit key">Submit</button>
+                </div>
             </div>
-            <p id="remaining"></p>
-            <ul id="found-words" hidden>Found Words:</ul>
+            <div class="word-list">
+                <p id="remaining"></p>
+                <div class="found">
+                    <ul id="found-words">Found Words:</ul>
+                </div>
+            </div>
         </div>
     </div>
 
