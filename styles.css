@@ -192,7 +192,7 @@ button:active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 2px;
 }
 
 .key-line {
@@ -200,7 +200,7 @@ button:active {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 2px;
 }
 
 .key {
@@ -226,6 +226,12 @@ button:active {
   font-weight: 600;
   margin: 0;
 } */
+
+.pressed {
+  transform: scale(0.95);
+  color: #92B5E0;
+  background-color: #92E0DA;
+}
 
 footer {
   margin-top: 50px;

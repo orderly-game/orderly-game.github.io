@@ -14,6 +14,7 @@ const words = ["aahed", "aahing", "aahs", "aalii", "aaliis", "aals", "aani", "aa
 // Other global variables
 const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 const scoreColors = ["aqua", "aquamarine", "blue", "blueviolet", "crimson", "coral", "fuchsia", "green", "gold", "maroon", "black"];
+const screenWidth = window.innerWidth;
 const gameLength = 120;
 let challengeLetters = [];
 let answerSet = [];
@@ -161,6 +162,7 @@ for (button of document.querySelectorAll(".start")) {
   button.addEventListener("click", function(event) {
     gameOn = true;
     level = this.innerHTML;
+    animateButton(this);
     introduction.classList.add("hidden");
     gameBox.classList.remove("hidden");
     getLetters();
@@ -177,8 +179,10 @@ document.addEventListener("keydown", function(event) {
 
   if (event.key === "Backspace") {
     playerGuess = playerGuess.slice(0, -1);
+    animateButton(document.querySelector(".←"))
   } else if (event.key.length === 1 && event.key.match(/[a-z]/i)) {
     playerGuess = playerGuess + event.key.toLowerCase();
+    animateButton(document.querySelector("." + event.key.toLowerCase()));
   } else if (event.key === "Enter") {
     if (foundWords.includes(playerGuess)) {
       updateResult("You already found this word");
@@ -192,6 +196,7 @@ document.addEventListener("keydown", function(event) {
       updateResult("Not a valid guess, try again!");
     }
     playerGuess = "";
+    animateButton(document.querySelector(".submit"));
   }
   guess.innerHTML = playerGuess.toUpperCase();
 })
@@ -203,6 +208,7 @@ for (button of document.querySelectorAll(".key")) {
       return;
     }
 
+    animateButton(this);
     if (this.innerHTML === "←") {
       playerGuess = playerGuess.slice(0, -1);
     } else if (this.innerHTML.length === 1 && this.innerHTML.match(/[a-z]/i)) {
@@ -229,6 +235,7 @@ for (button of document.querySelectorAll(".key")) {
 // Event Listener for New Letters button
 refresh.addEventListener("click", function() {
   this.blur();
+  animateButton(this);
   getLetters();
   if (timeRemaining !== 0) {
     timeRemaining = gameLength;
@@ -264,12 +271,24 @@ function animateScore(points) {
   scoreAlert.style.color = scoreColors[Math.floor(Math.random() * scoreColors.length)];
   document.body.prepend(scoreAlert);
   scoreAlert.classList.add("points");
-  scoreAlert.style.top = `${Math.random() * 20 + 30}%`;
-  scoreAlert.style.left = `${Math.random() * 60 + 20}%`;
+  if (screenWidth < 481) {
+    scoreAlert.style.top = `${Math.random() * 20 + 20}%`;
+    scoreAlert.style.left = `${Math.random() * 80 + 10}%`;
+  } else {
+    scoreAlert.style.top = `${Math.random() * 20 + 10}%`;
+    scoreAlert.style.left = `${Math.random() * 50 + 25}%`;
+  }
   
   setTimeout(() => {
     scoreAlert.remove();
   }, 1000);
+}
+
+function animateButton(button) {
+  button.classList.add("pressed");
+  setTimeout(() => {
+    button.classList.remove("pressed");
+  }, 100);
 }
 
 // Generate game title
