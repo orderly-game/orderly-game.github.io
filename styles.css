@@ -71,6 +71,7 @@ body {
 
 #instructions {
   padding: 10px;
+  font-weight: 600;
 }
 
 #start-buttons {
@@ -107,7 +108,7 @@ body {
   font-size: 50px;
   font-weight: 600;
   color: white;
-  margin: 0 0 15px 100px;
+  margin: 0 0 15px 70px;
   text-align: center;
 }
 
@@ -162,6 +163,8 @@ button {
 
 button:active {
   transform: scale(0.95);
+  color: #92B5E0;
+  background-color: #92E0DA;
 }
 
 #start {
@@ -187,27 +190,30 @@ button:active {
 .keyboard {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.key-line {
+  width: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 3px;
 }
 
 .key {
-  background-color: lightgray;
+  background-color: white;
   color: black;
   height: 45px;
-  width: 38px;
+  width: 9%;
   border: none;
-  margin: 2px 0px;
   padding: 0px;
   touch-action: manipulation;
 }
 
 .submit {
-  border: 1px solid black;
-  background-color: green;
-  color: white;
   width: 150px;
 }
 
@@ -242,6 +248,14 @@ footer {
   .found {
     height: 470px;
     overflow-y: auto;
+  }
+
+  .key {
+    width: 35px;
+  }
+
+  .submit {
+    width: 150px;
   }
 }
 
