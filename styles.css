@@ -206,8 +206,8 @@ button:active {
 .key {
   background-color: white;
   color: black;
-  height: 45px;
-  width: 9%;
+  height: 50px;
+  width: 8.8%;
   border: none;
   padding: 0px;
   touch-action: manipulation;
